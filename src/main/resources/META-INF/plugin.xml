@@ -93,6 +93,10 @@
 
         <treeStructureProvider implementation="org.rust.ide.projectView.RsTreeStructureProvider"/>
 
+        <!-- Tree change preprocessor -->
+
+        <psi.treeChangePreprocessor implementation="org.rust.ide.RustTreeChangePreprocessor"/>
+
         <!-- Usages Provider -->
 
         <lang.findUsagesProvider language="Rust" implementationClass="org.rust.ide.search.RsFindUsagesProvider"/>
