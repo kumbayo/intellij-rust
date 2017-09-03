@@ -19,8 +19,7 @@ class RsLiteralAnnotator : Annotator {
 
         // Check suffix
         when (literal) {
-            is RsLiteralKind.Integer, is RsLiteralKind.Float, is RsLiteralKind.String, is RsLiteralKind.Char -> {
-                literal as RsLiteralWithSuffix
+            is RsLiteralWithSuffix -> {
                 val suffix = literal.suffix
                 val validSuffixes = literal.validSuffixes
                 if (!suffix.isNullOrEmpty() && suffix !in validSuffixes) {
