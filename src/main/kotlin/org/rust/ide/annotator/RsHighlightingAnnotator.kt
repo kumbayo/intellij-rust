@@ -55,6 +55,12 @@ class RsHighlightingAnnotator : Annotator {
                     ?: return null // FIXME: `error` here perhaps?
                 return literal.textRange to color
             }
+            val kind = element.kind
+            if (kind is RsLiteralWithSuffix) {
+                val offsetSuffix = kind.offsets?.suffix ?: return null
+                return offsetSuffix.shiftRight(element.textOffset) to RsColor.PRIMITIVE_TYPE
+            }
+
             return null
         }
 

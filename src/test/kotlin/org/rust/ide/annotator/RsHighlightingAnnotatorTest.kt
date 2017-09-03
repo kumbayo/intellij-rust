@@ -65,6 +65,21 @@ class RsHighlightingAnnotatorTest : RsAnnotatorTestBase() {
         }
     """)
 
+    fun testLiteral() = checkInfo("""
+        fn <info>main</info>() {
+            let mut <info>a</info> = 1<info>usize</info>;
+            let mut <info>a</info> = 1<info>isize</info>;
+            let mut <info>a</info> = 1<info>u8</info>;
+            let mut <info>a</info> = 1<info>i8</info>;
+
+            let mut <info>a</info> = true;
+            let mut <info>a</info> = false;
+
+            let mut <info>a</info> = 42.0<info>f32</info>;
+            let mut <info>a</info> = 42.0<info>f64</info>;
+        }
+    """)
+
     fun testTypeParameters() = checkInfo("""
         trait <info>MyTrait</info> {
             type <info>AssocType</info>;
