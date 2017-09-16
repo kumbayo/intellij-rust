@@ -1,5 +1,6 @@
 import org.jetbrains.intellij.tasks.PatchPluginXmlTask
 import org.jetbrains.intellij.tasks.PublishTask
+import org.jetbrains.intellij.tasks.RunIdeTask
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import de.undercouch.gradle.tasks.download.Download
 import org.gradle.api.internal.HasConvention
@@ -190,6 +191,10 @@ project(":") {
             generateRustLexer, generateRustDocHighlightingLexer,
             generateRustParser, unpackClion
         )
+    }
+
+    tasks.withType<RunIdeTask> {
+        systemProperties.put("idea.ProcessCanceledException", "disabled")
     }
 
     tasks.withType<Test> {
