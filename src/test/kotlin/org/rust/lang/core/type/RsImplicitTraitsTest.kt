@@ -151,6 +151,9 @@ class RsImplicitTraitsTest : RsTypificationTestBase() {
             #[lang = "sized"]
             pub trait Sized {}
 
+            #[lang = "copy"]
+            pub trait Copy {}
+
             $code
         """
 
@@ -164,7 +167,11 @@ class RsImplicitTraitsTest : RsTypificationTestBase() {
         }
 
         val lookup = ImplLookup.relativeTo(typeRef)
-        val hasImpl = lookup.isSized(typeRef.type)
+        val hasImpl = when (traitName) {
+            "Copy" -> lookup.isCopy(typeRef.type)
+            "Sized" -> lookup.isSized(typeRef.type)
+            else -> error("Unexpected trait `$traitName` requested in test")
+        }
 
         check(mustHaveImpl == hasImpl) {
             "Expected: `${typeRef.type}` ${if (mustHaveImpl) "has" else "doesn't have" } impl of `$traitName` trait"
