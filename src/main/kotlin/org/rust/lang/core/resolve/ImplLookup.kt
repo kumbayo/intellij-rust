@@ -15,7 +15,6 @@ import org.rust.lang.core.psi.ext.*
 import org.rust.lang.core.resolve.indexes.RsImplIndex
 import org.rust.lang.core.resolve.indexes.RsLangItemIndex
 import org.rust.lang.core.resolve.ref.resolvePath
-import org.rust.lang.core.stubs.index.RsNamedElementIndex
 import org.rust.lang.core.types.BoundElement
 import org.rust.lang.core.types.TraitRef
 import org.rust.lang.core.types.infer.*
@@ -68,7 +67,7 @@ class ImplLookup(
         fnOnceOutput?.let { TyTypeParameter.associated(it) }
     }
     private val copyTrait: RsTraitItem? by lazy(NONE) {
-        RsNamedElementIndex.findDerivableTraits(project, "Copy").firstOrNull()
+        RsLangItemIndex.findLangItem(project, "copy")
     }
     private val sizedTrait: RsTraitItem? by lazy(NONE) {
         RsLangItemIndex.findLangItem(project, "sized")
